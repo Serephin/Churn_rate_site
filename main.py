@@ -70,6 +70,8 @@ def make_prediction(df):
     lgbm = joblib.load('lgb.pkl')
     pred=lgbm.predict(df)
     churn_rate=lgbm.predict_proba(df)
+    churn_rate = churn_rate[:, 1]
+    churn_rate = churn_rate.round(2)
     return pred, churn_rate
 
 
