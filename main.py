@@ -69,7 +69,8 @@ def scaling(df):
 def make_prediction(df):
     lgbm = joblib.load('lgb.pkl')
     pred=lgbm.predict(df)
-    return pred
+    churn_rate=lgbm.predict_proba(df)
+    return pred, churn_rate
 
 
 @app.post("/predict")
@@ -80,10 +81,10 @@ def predict_endpoint(data: ChurnInput):
     df = balance_preprocess(df)
     df = scaling(df)
     
-    pred = make_prediction(df)            
+    pred, churn_rate = make_prediction(df)            
     pred_list = pred.tolist()             
-    
-    return {
+    churn_rate_list = churn_rate.tolist() 
+    return {"churn_rate":churn_rate_list,
         "prediction": pred_list,
         "input": data.dict()              
     }
