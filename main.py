@@ -28,7 +28,7 @@ class ChurnInput(BaseModel):
     пол: str
     возраст: float
     стаж_в_банке: float
-    баланс_депозита: float
+    баланс_депозита: Optional[float] = None
     число_продуктов: int
     есть_кредитка: float   
     активный_клиент: float 
