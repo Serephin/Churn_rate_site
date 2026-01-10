@@ -10,6 +10,7 @@ from lightgbm import LGBMClassifier
 import json
 import re
 import pickle
+from typing import Optional
 #uvicorn main:app --reload --host 0.0.0.0 --port 8000
 app=FastAPI()
 
